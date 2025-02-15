@@ -1,3 +1,9 @@
+const Menu = document.querySelector(`.Menu`)
+const MenuLetrasWrapper = document.querySelectorAll(`.Menu-letrasWrapper`)
+const MenuIcon = document.querySelector(`.Menu-icon-img`)
+const Nav = document.querySelector(`.Nav`)
+const NavA = document.querySelectorAll(`.Nav-a`)
+
 const HeroTitleWrapper = document.querySelector(`.Hero-title-wrapper`);
 const HeroVideo = document.querySelector(`.Hero-video`)
 const HeroVideoWrapper = document.querySelector(`.Hero-videoWrapper`)
@@ -20,11 +26,63 @@ const ProjectsimgWrapperSix = document.querySelectorAll(`.Projects-imgWrapper--s
 const ProjectsimgWrapperSeven = document.querySelectorAll(`.Projects-imgWrapper--seven`)
 const ProjectsimgWrapperEight = document.querySelectorAll(`.Projects-imgWrapper--eight`)
 const ProjectsimgWrapperNine = document.querySelectorAll(`.Projects-imgWrapper--nine`)
-
-
+const Services = document.querySelector(`.Services`)
+const ServicesDivFirst = document.querySelector(`.Services-div--first`) 
+const ServicesDivSecond = document.querySelector(`.Services-div--second`) 
+const ServicesDivThird = document.querySelector(`.Services-div--third`) 
+const firstServiceImages = document.querySelectorAll('.Services-div--first .Service-imgWrapper');
+const firstServiceText = document.querySelector('.Services-div--first .Service-p--first');
+const secondServiceImages = document.querySelectorAll('.Services-div--second .Service-imgWrapper');
+const secondServiceText = document.querySelector('.Services-div--second .Service-p--second');
+const thirdServiceImages = document.querySelectorAll('.Services-div--third .Service-imgWrapper');
+const thirdServiceText = document.querySelector('.Services-div--third .Service-p--third');
+const Contact = document.querySelector(`.Contact`)
 let contador = 0;
+let isClicked = false;
 
 
+Menu.addEventListener(`mouseenter`, () => { 
+  MenuLetrasWrapper.forEach(wrapper => wrapper.classList.remove(`MouseIsOver`));
+
+  if (!isClicked) {
+    MenuIcon.classList.remove(`MouseIsOver`);
+  }
+});
+
+Menu.addEventListener(`mouseleave`, () => {
+  MenuLetrasWrapper.forEach(wrapper => wrapper.classList.add(`MouseIsOver`));
+
+  if (!isClicked) {
+    MenuIcon.classList.add(`MouseIsOver`);
+  }
+});
+
+Menu.addEventListener('click', function() {
+  isClicked = !isClicked;
+  if (isClicked) {
+    MenuIcon.classList.add(`ClickedRotate`);
+  } else {
+    MenuIcon.classList.remove(`ClickedRotate`);
+  }
+  Nav.classList.toggle('NavIsVisible')
+
+  NavA.forEach(( _ , i )=>{
+    NavA[i].classList.toggle('NavIsVisible')
+  })
+  if (MenuLetrasWrapper.length >= 5) {
+      const cambios = ['C', 'L', 'O', 'S', 'E'];
+      const originales = ['M', 'E', 'N', 'U', ''];
+      
+      let isChanged = MenuLetrasWrapper[0].querySelector('.Menu-letras').textContent === cambios[0];
+      
+      MenuLetrasWrapper.forEach((wrapper, index) => {
+          if (index < cambios.length) {
+              const spans = wrapper.querySelectorAll('.Menu-letras');
+              spans.forEach(span => span.textContent = isChanged ? originales[index] : cambios[index]);
+          }
+      });
+  }
+});
 
 window.addEventListener(`wheel`, (e) => {
     let { deltaY } = e;
@@ -134,15 +192,35 @@ window.addEventListener(`wheel`, (e) => {
    ProjectsimgWrapperNine.forEach((_ , i)=>{
     ProjectsimgWrapperNine[i].style.transform = `translate(${(52 - 42) * 2}vw, -${(52 - 42) * 2}vh) scale(${1 + (52 - 42) * 0.3})`;
    })
-
+   Services.style.transform = `translateY(-${(contador - 52) * 10}%)`;
+   Work.style.transform = `translateY(-${(contador - 42) * 10}%)`;
     } else{
       ProjectH4.forEach((_ , i) => {
         ProjectH4[i].style.transform = `translateX(-${(contador - 22) * 10}vw)`;
     });
     WorkIntro.style.transform = `translateX(-${(contador - 22) * 10}vw)`;
     }
+    function toggleActiveState(counter, min, max, elements, textElement) {
+      if (counter >= min && counter <= max) {
+          elements.forEach(el => el.classList.add('IsActive'));
+          textElement.classList.add('IsActive');
+      } else {
+          elements.forEach(el => el.classList.remove('IsActive'));
+          textElement.classList.remove('IsActive');
+      }
+  }
+  
+  // Aplicamos la función con los tres rangos
+  toggleActiveState(contador, 59, 61, firstServiceImages, firstServiceText);
+  toggleActiveState(contador, 62, 64, secondServiceImages, secondServiceText);
+  toggleActiveState(contador, 65, 67, thirdServiceImages, thirdServiceText);
+  
+  if( contador >= 67){
+    Contact.style.transform = `translateY(-${(contador - 67) * 10}%)`;
+  }
 
     HeroTitleWrapper.style.top = `-${contador * 10}%`;
     console.log(contador);
 });
+
 
