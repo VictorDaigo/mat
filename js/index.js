@@ -3,7 +3,7 @@ const MenuLetrasWrapper = document.querySelectorAll(`.Menu-letrasWrapper`)
 const MenuIcon = document.querySelector(`.Menu-icon-img`)
 const Nav = document.querySelector(`.Nav`)
 const NavA = document.querySelectorAll(`.Nav-a`)
-
+const HeaderH1 = document.querySelector(`.Header-h1`)
 const HeroTitleWrapper = document.querySelector(`.Hero-title-wrapper`);
 const HeroVideo = document.querySelector(`.Hero-video`)
 const HeroVideoWrapper = document.querySelector(`.Hero-videoWrapper`)
@@ -26,6 +26,7 @@ const ProjectsimgWrapperSix = document.querySelectorAll(`.Projects-imgWrapper--s
 const ProjectsimgWrapperSeven = document.querySelectorAll(`.Projects-imgWrapper--seven`)
 const ProjectsimgWrapperEight = document.querySelectorAll(`.Projects-imgWrapper--eight`)
 const ProjectsimgWrapperNine = document.querySelectorAll(`.Projects-imgWrapper--nine`)
+const PageContent = document.querySelector(`.Page-content`)
 const Services = document.querySelector(`.Services`)
 const ServicesDivFirst = document.querySelector(`.Services-div--first`) 
 const ServicesDivSecond = document.querySelector(`.Services-div--second`) 
@@ -67,7 +68,7 @@ Menu.addEventListener('click', function() {
   Nav.classList.toggle('NavIsVisible')
 
   NavA.forEach(( _ , i )=>{
-    NavA[i].classList.toggle('NavIsVisible')
+    NavA[i].classList.toggle('NavAIsVisible')
   })
   if (MenuLetrasWrapper.length >= 5) {
       const cambios = ['C', 'L', 'O', 'S', 'E'];
@@ -98,11 +99,15 @@ window.addEventListener(`wheel`, (e) => {
         HeroVideo.style.transform = `rotate(-5deg) scale(${1 + contador * 0.1})`;
         HeroVideo.style.width = "";
         HeroVideo.style.height = "";
+        HeaderH1.classList.remove('NavIsVisible');
+
     } else {
         HeroVideo.style.transform = `rotate(0) scale(1)`;
         HeroVideo.style.width = "80vw";
         HeroVideo.style.height = "80vh";
         HeroVideoWrapper.style.top = `-${(contador - 12) * 10}%`;
+        HeaderH1.classList.add('NavIsVisible');
+
     }
 
     if (contador < 22) {
@@ -193,20 +198,22 @@ window.addEventListener(`wheel`, (e) => {
     ProjectsimgWrapperNine[i].style.transform = `translate(${(52 - 42) * 2}vw, -${(52 - 42) * 2}vh) scale(${1 + (52 - 42) * 0.3})`;
    })
    Services.style.transform = `translateY(-${(contador - 52) * 10}%)`;
+   PageContent.style.backgroundColor = "lightcyan";
    Work.style.transform = `translateY(-${(contador - 42) * 10}%)`;
     } else{
       ProjectH4.forEach((_ , i) => {
         ProjectH4[i].style.transform = `translateX(-${(contador - 22) * 10}vw)`;
     });
+    PageContent.style.backgroundColor = "white";
     WorkIntro.style.transform = `translateX(-${(contador - 22) * 10}vw)`;
     }
     function toggleActiveState(counter, min, max, elements, textElement) {
       if (counter >= min && counter <= max) {
           elements.forEach(el => el.classList.add('IsActive'));
-          textElement.classList.add('IsActive');
+          textElement.classList.add('ServicePIsActive');
       } else {
           elements.forEach(el => el.classList.remove('IsActive'));
-          textElement.classList.remove('IsActive');
+          textElement.classList.remove('ServicePIsActive');
       }
   }
   
