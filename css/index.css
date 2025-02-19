@@ -746,7 +746,7 @@ background-position: center;
 .Footer-emailWrapper{
   display: flex;
   flex-flow: column nowrap;
-
+  
 }
 .Footer-designByWrapper{
   display: flex;
