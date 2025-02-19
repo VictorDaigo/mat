@@ -1,3 +1,7 @@
+const Cursor = document.querySelector(`.Cursor`)
+const CursorBasic = Cursor.querySelector(`.Cursor-basic`)
+const CursorPointer = Cursor.querySelector(`.Cursor-pointer`)
+const CursorVideo = Cursor.querySelector(`.Cursor-video`)
 const Menu = document.querySelector(`.Menu`)
 const MenuLetrasWrapper = document.querySelectorAll(`.Menu-letrasWrapper`)
 const MenuIcon = document.querySelector(`.Menu-icon-img`)
@@ -38,10 +42,52 @@ const secondServiceText = document.querySelector('.Services-div--second .Service
 const thirdServiceImages = document.querySelectorAll('.Services-div--third .Service-imgWrapper');
 const thirdServiceText = document.querySelector('.Services-div--third .Service-p--third');
 const Contact = document.querySelector(`.Contact`)
+const Footer = document.querySelector(`.Footer`)
 let contador = 0;
 let isClicked = false;
+window.addEventListener( `mousemove`, (e)=>{
+  let { clientX, clientY } = e;
+  Cursor.style.transform = `translate(${clientX}px, ${clientY}px)`;
 
+})
 
+function activarCursor() {
+  CursorBasic.classList.remove('CursorPointerIsActive');
+  CursorPointer.classList.add('CursorPointerIsActive');
+}
+
+function desactivarCursor() {
+  CursorBasic.classList.add('CursorPointerIsActive');
+  CursorPointer.classList.remove('CursorPointerIsActive');
+}
+
+// Aplicar el efecto a los enlaces
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('mouseenter', activarCursor);
+  link.addEventListener('mouseleave', desactivarCursor);
+});
+
+// Aplicar el efecto a Menu
+if (Menu) {
+  Menu.addEventListener('mouseenter', activarCursor);
+  Menu.addEventListener('mouseleave', desactivarCursor);
+}
+
+// Aplicar el efecto a cada elemento de ProjectH4
+ProjectH4.forEach(item => {
+  item.addEventListener('mouseenter', activarCursor);
+  item.addEventListener('mouseleave', desactivarCursor);
+});
+HeroVideo.addEventListener(`mouseenter`, ()=>{
+  CursorBasic.classList.remove('CursorPointerIsActive');
+  CursorPointer.classList.remove('CursorPointerIsActive');
+  CursorVideo.classList.add('CursorPointerIsActive');
+})
+HeroVideo.addEventListener(`mouseleave`, ()=>{
+  CursorBasic.classList.add('CursorPointerIsActive');
+  CursorPointer.classList.remove('CursorPointerIsActive');
+  CursorVideo.classList.remove('CursorPointerIsActive');
+})
 Menu.addEventListener(`mouseenter`, () => { 
   MenuLetrasWrapper.forEach(wrapper => wrapper.classList.remove(`MouseIsOver`));
 
@@ -66,6 +112,9 @@ Menu.addEventListener('click', function() {
     MenuIcon.classList.remove(`ClickedRotate`);
   }
   Nav.classList.toggle('NavIsVisible')
+  HeaderH1.classList.add('NavIsVisible');
+  HeaderH1.addEventListener('mouseenter', activarCursor);
+  HeaderH1.addEventListener('mouseleave', desactivarCursor);
 
   NavA.forEach(( _ , i )=>{
     NavA[i].classList.toggle('NavAIsVisible')
@@ -107,6 +156,8 @@ window.addEventListener(`wheel`, (e) => {
         HeroVideo.style.height = "80vh";
         HeroVideoWrapper.style.top = `-${(contador - 12) * 10}%`;
         HeaderH1.classList.add('NavIsVisible');
+        HeaderH1.addEventListener('mouseenter', activarCursor);
+        HeaderH1.addEventListener('mouseleave', desactivarCursor);
 
     }
 
@@ -224,10 +275,20 @@ window.addEventListener(`wheel`, (e) => {
   
   if( contador >= 67){
     Contact.style.transform = `translateY(-${(contador - 67) * 10}%)`;
+    Footer.style.transform = `translateY(-${(contador - 67) * 10}%)`;
+    PageContent.style.backgroundColor = "white";
+    
   }
-
+  if( contador >= 77){
+    
+    Footer.style.transform = `translateY(-${(77 - 67) * 10}%)`;
+   
+    
+  }else{
+    
+    Footer.style.transform = `translateY(-${(contador - 67) * 10}%)`;
+  }
     HeroTitleWrapper.style.top = `-${contador * 10}%`;
     console.log(contador);
 });
-
 

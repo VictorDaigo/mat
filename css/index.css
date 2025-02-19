@@ -19,6 +19,7 @@ ul, ol, li {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: none!important;
 }
 h1, h2, h3, h4, h5, h6 {
   font-size: inherit;
@@ -26,6 +27,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 a:focus {
   outline: none;
+  cursor: none;
 }
 img {
   width: 100%;
@@ -47,8 +49,42 @@ img {
 .Page-content{
   width: 100%;
   transition: background-color 2s ease-in-out;
+  cursor: none;
+  position: relative;
+  
   
 }
+.Cursor{
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  top: -15px;
+  left: -18px;
+  z-index: 5;
+  pointer-events: none;
+}
+.Cursor-basic{
+  opacity: 0;
+}
+.Cursor-pointer{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+
+}
+.Cursor-video{
+  width: 150%;
+  height: 150%;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+.CursorPointerIsActive{
+  opacity: 1;
+}
+
 .Header{
   width: 100%;
   display: flex;
@@ -65,6 +101,18 @@ img {
   opacity: 0;
   transition: opacity .5s ease-in-out;
   width: 10%;
+  position: relative;
+}
+.Header-h1Efecto{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.Header-h1Efecto:hover{
+  opacity: 1;
 }
 .Header-right{
   display: flex;
@@ -81,7 +129,6 @@ img {
   gap: .5rem;
   font-family: "Poppins", serif;
   font-style: italic;
-
 
 }
 .Menu-letrasLimiter{
@@ -159,11 +206,11 @@ img {
  padding-left: 15%;
  opacity: 0;
  transition: opacity .5s ease-out;
+ pointer-events: none;
 
  
 }
 .Nav-li{
-  background-color: red;
   overflow: hidden;
   height: 9vw;
   display: flex;
@@ -179,13 +226,13 @@ img {
   transition: transform .5s ease-in-out;
   letter-spacing: -0.625rem;
   font-weight: 600;
+  position: relative;
 }
 
-.Nav-a--first{
-  
-}
+
 .Nav-a--second{
   transition-delay: 150ms;
+  padding-left: .3rem;
 
 }
 .Nav-a--third{
@@ -193,6 +240,22 @@ img {
 
 }
 
+.Nav-efecto{
+  width: 115%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  background-color: white;
+}
+.Nav-efecto:hover{
+  opacity: 1;
+}
+.Nav-efecto img{
+  object-fit: contain;
+}
 
 .NavAIsVisible{
   transform: translateY(0) scaleX(0.75);
@@ -200,8 +263,9 @@ img {
 .NavIsVisible{
   opacity: 1;
   transform: translateY(0);
-  
+  pointer-events: all;
 }
+
 .Main{
   width: 100%;
   position: relative;
@@ -278,6 +342,12 @@ display: none;
   z-index: 2;
   transition: all .5s ease-in-out;
   transform: rotate(-5deg);
+}
+.Hero-video video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
 }
 .Hero-tittle-char{
   position: relative;
@@ -419,7 +489,9 @@ width: 1vw;
 height: 1vw;
 background-color: blue;
 transition: transform .5s ease-in-out;
+
 }
+
 .Projects-imgWrapper--first{
 top: calc(50% - 5vh);
 left: calc(40%);
@@ -479,6 +551,8 @@ left: 55%;
 .Services-h3{
   font-size: 2.5rem;
   min-height: 100px;
+  font-family: "Poppins", serif;
+  font-weight: 600;
 }
 .Services-div{
   position: relative;
@@ -529,13 +603,14 @@ transition: all .5s ease-in-out;
   width: 100%;
   position: absolute;
   min-height: 100vh;
-  background-color: aliceblue;
   top: 100vh;
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
   transition: transform .5s ease-in-out;
+  background-color: white;
+  z-index: 3;
 }
 .Contact-a{
   width: 70%;
@@ -544,21 +619,141 @@ display: flex;
 flex-flow: column nowrap;
 align-items: center;
 justify-content: center;
-border-radius: 180px;
+border-radius: 220px;
 background-color: #DFFF6B;
 box-shadow: 0 0 0 8px rgba(0, 0, 0, 1);
 border: 8px solid black;
 transition: all .5s ease-in-out;
+background-size: cover;
+background-position: center;
 }
-.Contact-a:hover{
-  box-shadow: 10px 10px 0 16px rgba(0, 0, 0, 1);
-}
+
 .Contact-span{
-  
+  font-family: "Poppins", serif;
   font-size: 2.5rem;
+  font-weight: 600;
 } 
 .Contact-h3{
-  font-size: 6vw;
+  font-size: 9vw;
+  font-family: "Poppins", serif;
+  font-style: italic;
+  font-weight: 600;
   text-transform: uppercase;
+  transform: scaleX(0.75);
+  letter-spacing: -0.625rem;
+  transition: transform .5s ease-in-out;
+
+
+}
+
+.Contact-a:hover{
+  background-image: url('../assets/button-contact-bg.png'); /* Reemplaza con la URL de la imagen */
+  background-size: 200% auto; /* La imagen será el doble de ancha */
+  animation: moveBg 5s linear infinite; /* Aplica la animación */
+  box-shadow: 10px 10px 0 16px rgba(0, 0, 0, 1);
+  
+}
+.Contact-a:hover .Contact-h3 {
+  transform: scaleX(0.85);
+}
+@keyframes moveBg {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 100% center;
+  }
+}
+
+
+.Footer{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+ bottom: -100vh;
+  background-color: var(--text-main-color);
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: end;
+  z-index: 2;
+  font-family: "Poppins", serif;
+  transition: transform .5s ease-in-out;
+
+}
+.Footer-content{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  min-height: 90%;
+}
+.Footer-menu{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+}
+.Footer-gifWrapper{
+  width: 45vw;
+  min-height: 25vw;
+  padding-top: 2vw;
+}
+.Social{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: end;
+  gap: 1rem;
+}
+.Footer-span{
+  color: rgba(0, 0, 0, 0.63);
+  font-size: 1rem;
+  font-weight: 500;
+  
+}
+.Footer-a{
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: 600;
+}
+.Social-span{
+  color: rgba(0, 0, 0, 0.63);
+  font-size: 1rem;
+  font-weight: 500;
+}
+.Social-a{
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: 600;
+}
+.Footer-contact{
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  min-height: 10%;
+}
+.Footer-emailWrapper{
+  display: flex;
+  flex-flow: column nowrap;
+
+}
+.Footer-designByWrapper{
+  display: flex;
+  flex-flow: column nowrap;
+  text-align: center;
+}
+.Footer-contact-span{
+  font-size: 1rem;
   font-weight: 600;
 }
